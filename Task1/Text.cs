@@ -43,15 +43,16 @@ namespace WinForms_DZ3.Task1
             BackColor = Color.White;
         }
 
-        public void Cancel() 
+        public string Cancel() 
         {
             if (this.Previous == null)
-                return;
+                return null;
             this.Current = Previous.Current;
             this.Font = Previous.Font;
             this.ForeColor = Previous.ForeColor;
             this.BackColor = Previous.BackColor;
             this.Previous = Previous.Previous;
+            return Current;
         }
 
         internal Text Clone()

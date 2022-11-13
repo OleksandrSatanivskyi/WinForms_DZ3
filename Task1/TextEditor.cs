@@ -12,10 +12,12 @@ namespace WinForms_DZ3.Task1
 {
     public partial class TextEditor : Form
     {
+        private bool CancelTriger { get; set; }
         private string CurrentFilePath { get; set; }
         private Text FileText { get; set; }
         public TextEditor()
         {
+            CancelTriger = false;
             InitializeComponent();
             MainTextBox.ContextMenuStrip = contextMenuStrip;
             FileText = new Text(MainTextBox.Text, null, MainTextBox.Font, MainTextBox.ForeColor, MainTextBox.BackColor);
@@ -85,14 +87,15 @@ namespace WinForms_DZ3.Task1
 
         private void Cancel_Click(object sender, EventArgs e)
         {
+            CancelTriger = true;
             var s = MainTextBox.SelectionStart;
-            FileText.Cancel();
+            MainTextBox.Text = FileText.Cancel();
 
-            MainTextBox.Text = FileText.Current;
+            //MainTextBox.Text = FileText.Current;
             MainTextBox.Font = FileText.Font;
             MainTextBox.ForeColor = FileText.ForeColor;
             MainTextBox.BackColor = FileText.BackColor;
-
+            
             MainTextBox.SelectionStart = s;
         }
 
@@ -137,8 +140,13 @@ namespace WinForms_DZ3.Task1
 
         private void MainTextBox_TextChanged(object sender, EventArgs e)
         {
-            FileText.Previous = FileText.Clone();
-            FileText.Current = MainTextBox.Text;
+            if (!CancelTriger)
+            {
+                FileText.Previous = FileText.Clone();
+                FileText.Current = MainTextBox.Text;
+                CancelTriger = false;
+            }
+            
         }
     }
 }

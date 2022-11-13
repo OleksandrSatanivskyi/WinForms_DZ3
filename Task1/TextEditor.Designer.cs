@@ -138,7 +138,6 @@
             // tsmCancel
             // 
             this.tsmCancel.Name = "tsmCancel";
-            this.tsmCancel.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.tsmCancel.Size = new System.Drawing.Size(55, 20);
             this.tsmCancel.Text = "Cancel";
             this.tsmCancel.Click += new System.EventHandler(this.Cancel_Click);
